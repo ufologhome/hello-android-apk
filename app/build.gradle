@@ -1,25 +1,15 @@
-plugins {
-    id 'com.android.application'
-}
-
 android {
-    namespace "com.example.helloandroid"
-    compileSdk 33
-
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.example.helloandroid"
-        minSdk 24
-        targetSdk 33
+        minSdkVersion 17  // Android 7.0+
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-        }
     }
 }
 
 dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    // constraintlayout не нужен, используем LinearLayout
 }
