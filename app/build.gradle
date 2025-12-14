@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application'
-    id 'kotlin-android' // если используешь Kotlin
 }
 
 android {
@@ -24,5 +23,4 @@ android {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    // ConstraintLayout не нужен, используем LinearLayout
 }
