@@ -14,10 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         val button = findViewById<Button>(R.id.btnOpen)
         button.setOnClickListener {
-            val intent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://www.youtube.com")
-            )
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com"))
             startActivity(intent)
         }
     }
