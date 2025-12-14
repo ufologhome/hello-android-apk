@@ -3,12 +3,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 33
+    namespace "com.example.helloandroid"
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.helloandroid"
-        minSdkVersion 17
-        targetSdkVersion 33
+        minSdk 17
+        targetSdk 33
         versionCode 1
         versionName "1.0"
     }
@@ -18,6 +19,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
