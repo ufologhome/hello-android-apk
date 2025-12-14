@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    namespace "com.example.helloandroid"
+    namespace "com.example.simpleyoutube"
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.helloandroid"
-        minSdk 17
+        applicationId "com.example.simpleyoutube"
+        minSdk 24        // Android 7.0
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -17,7 +17,6 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
