@@ -7,12 +7,12 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python 3.10
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
@@ -26,9 +26,7 @@ jobs:
             autoconf libtool pkg-config \
             zlib1g-dev \
             libncurses5-dev libncursesw5-dev libtinfo6 \
-            cmake \
-            libffi-dev \
-            libssl-dev
+            cmake libffi-dev libssl-dev
 
       - name: Install Python tools
         run: |
@@ -38,25 +36,24 @@ jobs:
       - name: Add local bin to PATH
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Prepare buildozer.spec
+      - name: Init buildozer
         run: |
           buildozer init
           sed -i 's/^requirements = .*/requirements = python3,kivy/' buildozer.spec
           sed -i 's/^# android.api = .*/android.api = 31/' buildozer.spec
           sed -i 's/^# android.minapi = .*/android.minapi = 21/' buildozer.spec
           sed -i 's/^# android.arch = .*/android.arch = armeabi-v7a/' buildozer.spec
-          sed -i 's/^# android.ndk = .*/android.ndk = 25b/' buildozer.spec
-          sed -i 's/^# android.sdk = .*/android.sdk = 31/' buildozer.spec
 
-      - name: Clean previous builds
-        run: buildozer android clean || true
+      - name: Force NDK r25b
+        run: |
+          echo "ANDROID_NDK_HOME=$HOME/.buildozer/android/platform/android-ndk-r25b" >> $GITHUB_ENV
+          echo "ANDROID_NDK_ROOT=$HOME/.buildozer/android/platform/android-ndk-r25b" >> $GITHUB_ENV
 
-      - name: Accept Android licenses
+      - name: Accept licenses
         run: yes | sdkmanager --licenses || true
 
       - name: Build APK
-        run: |
-          yes | buildozer -v android debug
+        run: yes | buildozer android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
