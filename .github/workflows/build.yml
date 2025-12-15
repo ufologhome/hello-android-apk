@@ -45,13 +45,18 @@ jobs:
           sed -i 's/^# android.api = .*/android.api = 31/' buildozer.spec
           sed -i 's/^# android.minapi = .*/android.minapi = 21/' buildozer.spec
           sed -i 's/^# android.arch = .*/android.arch = armeabi-v7a/' buildozer.spec
+          sed -i 's/^# android.ndk = .*/android.ndk = 25b/' buildozer.spec
+          sed -i 's/^# android.sdk = .*/android.sdk = 31/' buildozer.spec
+
+      - name: Clean previous builds
+        run: buildozer android clean || true
 
       - name: Accept Android licenses
         run: yes | sdkmanager --licenses || true
 
       - name: Build APK
         run: |
-          yes | buildozer android debug
+          yes | buildozer -v android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
